@@ -4,9 +4,13 @@ import 'package:shop_app_maximilian/providers/product.dart';
 import 'package:shop_app_maximilian/screens/product_detail_screen.dart';
 
 class ProductItem extends StatelessWidget {
+  final Product product;
+
+  const ProductItem({Key key, @required this.product}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    final product = Provider.of<Product>(context, listen: false);
+    // final product = Provider.of<Product>(context, listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10.0),
       child: GridTile(
@@ -25,15 +29,6 @@ class ProductItem extends StatelessWidget {
               );
             },
             child: const Text('Never changes'),
-            // child: IconButton(
-            //   onPressed: () {
-            //     product.toggleFavoriteStatus();
-            //   },
-            //   color: Theme.of(context).accentColor,
-            //   icon: product.isFavorite
-            //       ? const Icon(Icons.favorite_rounded)
-            //       : const Icon(Icons.favorite_border_rounded),
-            // ),
           ),
           trailing: IconButton(
             onPressed: () {},
