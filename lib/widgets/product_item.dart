@@ -22,7 +22,7 @@ class ProductItem extends StatelessWidget {
                 onPressed: () {
                   product.toggleFavoriteStatus();
                 },
-                color: Colors.deepOrange,
+                color: Colors.deepOrangeAccent,
                 icon: product.isFavorite
                     ? const Icon(Icons.favorite_rounded)
                     : const Icon(Icons.favorite_border_rounded),
