@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app_maximilian/providers/cart.dart';
+import 'package:shop_app_maximilian/screens/cart_screen.dart';
+import 'package:shop_app_maximilian/widgets/badge.dart';
 
 import '../widgets/products_grid.dart';
 
@@ -22,8 +26,6 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Shophouse'),
-        centerTitle: true,
-        elevation: 0.0,
         actions: [
           PopupMenuButton(
             onSelected: (FilterOptions selectedValue) {
@@ -48,6 +50,25 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
                 ),
               ];
             },
+          ),
+          Consumer<Cart>(
+            builder: (_, cartData, Widget child) {
+              return Badge(
+                value: cartData.itemCount.toString(),
+                child: child,
+              );
+            },
+            child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return const CartScreen();
+                  }),
+                );
+              },
+              icon: const Icon(Icons.shopping_cart_rounded),
+            ),
           ),
         ],
       ),

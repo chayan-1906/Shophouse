@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app_maximilian/providers/cart.dart';
 import 'package:shop_app_maximilian/providers/products.dart';
 import 'package:shop_app_maximilian/screens/products_overview_screen.dart';
 
@@ -13,8 +14,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (BuildContext context) => Products(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (BuildContext context) => Products()),
+        ChangeNotifierProvider(create: (BuildContext context) => Cart()),
+      ],
       child: MaterialApp(
         title: 'Shophouse',
         debugShowCheckedModeBanner: false,
@@ -22,6 +26,10 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.purple,
           accentColor: Colors.deepOrange,
           fontFamily: GoogleFonts.nunito().fontFamily,
+          appBarTheme: const AppBarTheme(
+            elevation: 0.0,
+            centerTitle: true,
+          ),
         ),
         home: const ProductOverviewScreen(),
       ),
