@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app_maximilian/providers/cart.dart';
 import 'package:shop_app_maximilian/screens/cart_screen.dart';
+import 'package:shop_app_maximilian/widgets/app_drawer.dart';
 import 'package:shop_app_maximilian/widgets/badge.dart';
 
 import '../widgets/products_grid.dart';
@@ -27,6 +28,25 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
       appBar: AppBar(
         title: const Text('Shophouse'),
         actions: [
+          Consumer<Cart>(
+            builder: (_, cartData, Widget child) {
+              return Badge(
+                value: cartData.itemCount.toString(),
+                child: child,
+              );
+            },
+            child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return const CartScreen();
+                  }),
+                );
+              },
+              icon: const Icon(Icons.shopping_cart_rounded),
+            ),
+          ),
           PopupMenuButton(
             onSelected: (FilterOptions selectedValue) {
               setState(() {
@@ -51,27 +71,9 @@ class _ProductOverviewScreenState extends State<ProductOverviewScreen> {
               ];
             },
           ),
-          Consumer<Cart>(
-            builder: (_, cartData, Widget child) {
-              return Badge(
-                value: cartData.itemCount.toString(),
-                child: child,
-              );
-            },
-            child: IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) {
-                    return const CartScreen();
-                  }),
-                );
-              },
-              icon: const Icon(Icons.shopping_cart_rounded),
-            ),
-          ),
         ],
       ),
+      drawer: const AppDrawer(),
       body: ProductsGrid(showFavorites: _showFavoritesOnly),
     );
   }

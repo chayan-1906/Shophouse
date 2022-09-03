@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app_maximilian/providers/cart.dart';
+import 'package:shop_app_maximilian/providers/orders.dart';
 import 'package:shop_app_maximilian/providers/products.dart';
+import 'package:shop_app_maximilian/screens/orders_screen.dart';
 import 'package:shop_app_maximilian/screens/products_overview_screen.dart';
 
 void main() {
@@ -18,6 +20,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (BuildContext context) => Products()),
         ChangeNotifierProvider(create: (BuildContext context) => Cart()),
+        ChangeNotifierProvider(create: (BuildContext context) => Orders()),
       ],
       child: MaterialApp(
         title: 'Shophouse',
@@ -32,6 +35,9 @@ class MyApp extends StatelessWidget {
           ),
         ),
         home: const ProductOverviewScreen(),
+        routes: {
+          OrdersScreen.routeName: (context) => const OrdersScreen(),
+        },
       ),
     );
   }
