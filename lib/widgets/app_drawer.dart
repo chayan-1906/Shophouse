@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app_maximilian/screens/orders_screen.dart';
+import 'package:shop_app_maximilian/screens/user_products_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key key}) : super(key: key);
@@ -38,6 +39,25 @@ class AppDrawer extends StatelessWidget {
                 }),
               );*/
               Navigator.pushReplacementNamed(context, OrdersScreen.routeName);
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.edit_rounded),
+            title: const Text('Manage Products'),
+            onTap: () {
+              /*Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return const OrdersScreen();
+                }),
+              );*/
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return const UserProductsScreen();
+                }),
+              );
             },
           ),
         ],
